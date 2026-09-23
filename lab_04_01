@@ -1,0 +1,49 @@
+
+
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    const double x0 = 0.0;
+    const double y0 = 0.0;
+    const double r = 5.0;
+
+    double x, y;
+
+    while (true) {
+        cout << "enter point coordinates(x y) :";
+        cin >> x >> y;
+
+        double d2 = (x - x0) * (x - x0) + (y - y0) * (y - y0);
+        double r2 = r * r;
+
+        if (x == x0 && y == y0) {
+            cout << "the poin is at the center og the circle." << endl;
+            break;
+        }
+        else if (d2 == r2) {
+            cout << "the point is on the boundary of the circle. please enter another point." << endl;
+        }
+        else if (d2 < r2) {
+            cout << " the point is inside the circle." << endl;
+            break;
+        }
+        else {
+            cout << " the point is outside the circle." << endl;
+            break;
+        }
+
+    }
+
+    return 0;
+}
+    
+
+
+
+
+
+    
