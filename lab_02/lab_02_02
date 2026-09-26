@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+
+	int Ochinka1, Ochinka2, Ochinka3; 
+
+	double coefficient1, coefficient2, coefficient3;
+
+	cout << "Enter the first grade: ";
+	cin >> Ochinka1;
+	cout << "Enter the coefficient for the first grade: ";
+	cin >> coefficient1;
+	cout << "Enter the second grade: ";
+	cin >> Ochinka2;
+	cout << "Enter the coefficient for the second grade: ";
+	cin >> coefficient2;
+	cout << "Enter the third grade: ";
+	cin >> Ochinka3;
+	cout << "Enter the coefficient for the third grade: ";
+	cin >> coefficient3;
+
+	double AverageValue = Ochinka1 * coefficient1 + Ochinka2 * coefficient2 + Ochinka3 * coefficient3;
+	cout << "\n=====Results=====" << endl;
+	cout << "Ochinka 1: " << Ochinka1 << " coef: " << coefficient1 << endl;
+	cout << "Ochinka 2: " << Ochinka2 << " coef: " << coefficient2 << endl;
+	cout << "Ochinka 3: " << Ochinka3 << " coef: " << coefficient3 << endl;
+	cout << "Average value: " << AverageValue << endl;
+	return 0;
+}
