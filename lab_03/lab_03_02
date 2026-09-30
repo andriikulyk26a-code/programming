@@ -1,0 +1,24 @@
+#include <iostream> 
+#include <cmath>
+
+using namespace std;
+
+int main() {
+	double i; 
+	cin >> i;
+	
+	double a = sqrt(pow(-i - i, 2) + pow((i + 1) - (i - 1), 2));
+	double b = sqrt(pow(-i, 2) + pow(i + 1, 2));
+	double c = sqrt(pow(i, 2) + pow(i - 1, 2));
+
+	double p = (a + b + c) / 2;
+	double S = sqrt(p * (p - a) * (p - b) * (p - c));
+
+	double Wc = (2 * sqrt(a * b * p * (p - c))) / (a + b);
+	double r = S / p;
+
+	cout << "Wc = " << Wc << endl;
+	cout << "r = " << r << endl;
+
+	return 0;
+}
