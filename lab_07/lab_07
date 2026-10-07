@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+    ofstream out("myfile.dat");
+    out << "abc!=\n"
+        << "def!=\n"
+        << "abc!\n"
+        << "def========\n"
+        << "abc!!!!!!!!=!=!=abc !=\n";
+    out.close();
+
+    ifstream in("myfile.dat");
+    if (!in)
+    {
+        cout << "Cannot open file" << endl;
+        return 1;
+    }
+
+    int count = 0;
+    char prev = 0, ch;
+
+    while (in.get(ch))
+    {
+        if (prev == '!' && ch == '=')
+            count++;
+        prev = ch;
+    }
+    in.close();
+
+    cout << "Number of != operations: " << count << endl;
+    return 0;
+}
