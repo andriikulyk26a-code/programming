@@ -1,0 +1,49 @@
+#include <iostream> 
+#include <iomanip> 
+#include <string>
+
+using namespace std;
+
+int main() {
+    double startVal,step; 
+    int rows;
+
+    cout << "=== Unit Conversion Table: Carats -> Grams / Grains ===\n\n";
+
+    cout << "Enter the initial value (carats): ";
+    cin >> startVal;
+
+    cout << "Enter the step value: ";
+    cin >> step;
+
+    cout << "Enter the number of rows (10 to 15): ";
+    cin >> rows;
+
+    cout << "\n" << string(48, '-') << "\n";
+    cout << setw(12) << "Carats"
+        << setw(18) << "Grams (g)"
+        << setw(18) << "Grains" << "\n";
+    cout << string(48, '-') << "\n";
+
+    cout << fixed << setprecision(4);
+
+    int count = 0;
+    double currentVal = startVal;
+
+    while (count < rows) {
+    
+        double grams = currentVal * 0.2;
+        double grains = currentVal * 2.9412;
+
+        cout << setw(12) << currentVal
+            << setw(18) << grams
+            << setw(18) << grains << "\n";
+
+        currentVal += step; 
+        count++;            
+    }
+
+    cout << string(48, '-') << "\n";
+
+    return 0;
+}
