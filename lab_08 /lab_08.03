@@ -1,0 +1,22 @@
+#include <iostream>
+using namespace std;
+
+void printChar(char c, int n);   // prototype
+
+int main() {
+    char c;
+    int n;
+    cout << "Enter a character and a number (not zero): ";
+    cin >> c >> n;
+    if (n != 0)
+        printChar(c, n);
+    else
+        cout << "Number must not be zero" << endl;
+    return 0;
+}
+
+void printChar(char c, int n) {
+    for (int i = 0; i < n; i++)
+        cout << c;
+    cout << endl;
+}
