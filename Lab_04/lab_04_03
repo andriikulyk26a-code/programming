@@ -1,31 +1,26 @@
 #include <iostream>
-#include <cmath> 
+#include <cmath>
 #include <iomanip>
-
 using namespace std;
 
 int main() {
-    const double a = 1.5; 
-    const double b = 4.0; 
-    const double x = 2.0;
+    const double x = 2.5, a = 1.0, b = 3.0;   // input data
+    double y = 0;
 
-    double y = 0.0;
+    if (x <= a)
+        y = pow(pow(cos(x - a), 4), 1.0 / 5);
+    if (x > a && x <= b)
+        y = x * x * tan(b * x);
+    if (x > b)
+        y = fabs(sin((a + b) * x) / (x * x - b * b));
 
-    if (x <= a) {
-        y = cbrt(pow(cos(x - a), 2));
-    }
-    else if (x <= b) {
-        y = pow(x, 2) * tan(b * x);
-    }
-    else {
-        y = abs((sin(a + b) * x) / (pow(x, 2) - pow(b, 2)));
-    }
+    cout << fixed << setprecision(4);
+    cout << "Input data:\n";
+    cout << "x = " << setw(8) << x << "\n";
+    cout << "a = " << setw(8) << a << "\n";
+    cout << "b = " << setw(8) << b << "\n";
+    cout << "Result:\n";
+    cout << "y = " << setw(8) << y << endl;
 
-    cout << fixed << setprecision(2);
-    cout << "a = " << a << endl;
-    cout << "b = " << b << endl;
-    cout << "x = " << x << endl;
-    cout << "y = " << y << endl;
-
-    return 0;
+    return 0
 }
