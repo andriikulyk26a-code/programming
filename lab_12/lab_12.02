@@ -1,0 +1,44 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+double f14(double x) {
+    return 2.0 * sin(x) * sin(2.0 * x - 1.5) * cos(2.0 * x + 1.5) - 6.0;
+}
+
+double f15(double x) {
+    return fabs(cos(x * x) - 0.51) * sin(3.0 * x - 4.0) - 4.44;
+}
+
+int main() {
+    int i = 9;
+
+    // a = sum(k=1..14) of f14(k)
+    double a = 0.0;
+    int k = 1;
+    do {
+        a += f14(k);
+        k++;
+    } while (k <= i + 5);
+
+    // b = prod(k=1..9) of f15(k)
+    double b = 1.0;
+    k = 1;
+    do {
+        b *= f15(k);
+        k++;
+    } while (k <= i);
+
+    double prod = a * b;
+    double z = (prod >= 0.0) ? pow(prod, 0.25) : 0.0;
+
+    cout << fixed << setprecision(4);
+    cout << "i = " << i << "\n";
+    cout << "a = " << a << "\n";
+    cout << "b = " << b << "\n";
+    cout << "z = " << z << "\n";
+
+    return 0;
+}
