@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cctype>
+
+using namespace std;
+
+int main() {
+    char ch;
+    do {
+        cout << "Enter letter (Q or Z to quit): ";
+        if (!(cin >> ch)) break;
+
+        if (isdigit(ch)) {
+            cout << "Invalid symbol. Digits are not allowed.\n";
+            continue;
+        }
+
+        ch = toupper(ch);
+        if (ch == 'Q' || ch == 'Z') {
+            cout << "Exit.\n";
+            break;
+        }
+
+        int digit = 0;
+        if (ch >= 'A' && ch <= 'C') digit = 2;
+        else if (ch >= 'D' && ch <= 'F') digit = 3;
+        else if (ch >= 'G' && ch <= 'I') digit = 4;
+        else if (ch >= 'J' && ch <= 'L') digit = 5;
+        else if (ch >= 'M' && ch <= 'O') digit = 6;
+        else if (ch >= 'P' && ch <= 'S') digit = 7;
+        else if (ch >= 'T' && ch <= 'V') digit = 8;
+        else if (ch >= 'W' && ch <= 'Y') digit = 9;
+
+        if (digit != 0) {
+            cout << "Letter " << ch << " corresponds to digit " << digit << "\n";
+        } else {
+            cout << "Invalid symbol. Enter Q or Z to quit.\n";
+        }
+    } while (true);
+
+    return 0;
+}
