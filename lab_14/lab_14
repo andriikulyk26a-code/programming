@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+double f9(double x) {
+    return cos(x * x + 1.0) - fabs(sin(2.0 * x) - 5.76);
+}
+
+int main() {
+    const int startYear = 2000;
+    const int endYear = 2010;
+    const int n = endYear - startYear + 1;
+
+    vector<int> years(n);
+    vector<double> y(n);
+
+    cout << fixed << setprecision(2);
+    cout << "Year |   Profit/Loss\n";
+    cout << "-----+--------------\n";
+
+    for (int i = 0; i < n; i++) {
+        years[i] = startYear + i;
+        y[i] = 100.0 * f9(years[i]);
+        cout << years[i] << " | " << setw(10) << y[i] << "\n";
+    }
+
+    double lossSum = 0.0;
+    int lossCount = 0;
+    double maxProfit = -1e9;
+    bool hasProfit = false;
+
+    for (double val : y) {
+        if (val < 0.0 && (val < -650.0 || val > -150.0)) {
+            lossSum += val;
+            lossCount++;
+        }
+        if (val > 0.0) {
+            if (!hasProfit || val > maxProfit) {
+                maxProfit = val;
+            }
+            hasProfit = true;
+        }
+    }
+
+    cout << "--------------------\n";
+    if (lossCount > 0) cout << "Sum of targeted losses: " << lossSum << "\n";
+    else cout << "No losses matching condition found.\n";
+
+    if (hasProfit) cout << "Max profit: " << maxProfit << "\n";
+    else cout << "No profit years found.\n";
+
+    return 0;
+}
