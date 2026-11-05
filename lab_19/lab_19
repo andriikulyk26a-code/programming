@@ -1,0 +1,49 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+// Function f9(x) from variant table
+double f9(double x) {
+    return cos(x * x + 1.0) - fabs(sin(2.0 * x) - 5.76);
+}
+
+int main() {
+    const int ROWS = 4;
+    const int COLS = 4;
+    double a[ROWS][COLS];
+
+    cout << fixed << setprecision(4);
+    cout << "=== Matrix 4x4 ===\n";
+
+    // Matrix generation and printing
+    for (int k = 1; k <= ROWS; k++) {
+        for (int n = 1; n <= COLS; n++) {
+            a[k - 1][n - 1] = f9(k) * sin((double)k / n);
+            cout << setw(10) << a[k - 1][n - 1] << " ";
+        }
+        cout << "\n";
+    }
+
+    double diagSum = 0.0;
+    int negativeCount = 0;
+
+    // Calculation: main diagonal sum and total negative count
+    for (int k = 0; k < ROWS; k++) {
+        for (int n = 0; n < COLS; n++) {
+            if (k == n) {
+                diagSum += a[k][n];
+            }
+            if (a[k][n] < 0.0) {
+                negativeCount++;
+            }
+        }
+    }
+
+    cout << "-------------------------------------------\n";
+    cout << "Sum of main diagonal elements: " << diagSum << "\n";
+    cout << "Count of negative elements:    " << negativeCount << "\n";
+
+    return 0;
+}
