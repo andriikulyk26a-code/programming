@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+#define CODE(a, b) (((a) << 8) | (b))
+
+int main() {
+    string s;
+    while (cin >> s) {
+        if (s.length() != 2) { cout << "Invalid input\n"; continue; }
+
+        int key = CODE(toupper(s[0]), toupper(s[1]));
+        const char* name = nullptr;
+
+        switch (key) {
+            case CODE('A','L'): name = "Alabama"; break;
+            case CODE('A','K'): name = "Alaska"; break;
+            case CODE('A','Z'): name = "Arizona"; break;
+            case CODE('A','R'): name = "Arkansas"; break;
+            case CODE('C','A'): name = "California"; break;
+            case CODE('C','O'): name = "Colorado"; break;
+            case CODE('C','T'): name = "Connecticut"; break;
+            case CODE('D','E'): name = "Delaware"; break;
+            case CODE('F','L'): name = "Florida"; break;
+            case CODE('G','A'): name = "Georgia"; break;
+            case CODE('H','I'): name = "Hawaii"; break;
+            case CODE('I','D'): name = "Idaho"; break;
+            case CODE('I','L'): name = "Illinois"; break;
+            case CODE('I','N'): name = "Indiana"; break;
+            case CODE('I','A'): name = "Iowa"; break;
+            case CODE('K','S'): name = "Kansas"; break;
+            case CODE('K','Y'): name = "Kentucky"; break;
+            case CODE('L','A'): name = "Louisiana"; break;
+            case CODE('M','E'): name = "Maine"; break;
+            case CODE('M','D'): name = "Maryland"; break;
+            case CODE('M','A'): name = "Massachusetts"; break;
+            case CODE('M','I'): name = "Michigan"; break;
+            case CODE('M','N'): name = "Minnesota"; break;
+            case CODE('M','S'): name = "Mississippi"; break;
+            case CODE('M','O'): name = "Missouri"; break;
+            case CODE('M','T'): name = "Montana"; break;
+            case CODE('N','E'): name = "Nebraska"; break;
+            case CODE('N','V'): name = "Nevada"; break;
+            case CODE('N','H'): name = "New Hampshire"; break;
+            case CODE('N','J'): name = "New Jersey"; break;
+            case CODE('N','M'): name = "New Mexico"; break;
+            case CODE('N','Y'): name = "New York"; break;
+            case CODE('N','C'): name = "North Carolina"; break;
+            case CODE('N','D'): name = "North Dakota"; break;
+            case CODE('O','H'): name = "Ohio"; break;
+            case CODE('O','K'): name = "Oklahoma"; break;
+            case CODE('O','R'): name = "Oregon"; break;
+            case CODE('P','A'): name = "Pennsylvania"; break;
+            case CODE('R','I'): name = "Rhode Island"; break;
+            case CODE('S','C'): name = "South Carolina"; break;
+            case CODE('S','D'): name = "South Dakota"; break;
+            case CODE('T','N'): name = "Tennessee"; break;
+            case CODE('T','X'): name = "Texas"; break;
+            case CODE('U','T'): name = "Utah"; break;
+            case CODE('V','T'): name = "Vermont"; break;
+            case CODE('V','A'): name = "Virginia"; break;
+            case CODE('W','A'): name = "Washington"; break;
+            case CODE('W','V'): name = "West Virginia"; break;
+            case CODE('W','I'): name = "Wisconsin"; break;
+            case CODE('W','Y'): name = "Wyoming"; break;
+            default: cout << "Error: Unknown code\n"; continue;
+        }
+        cout << name << "\n";
+    }
+    return 0;
+}
