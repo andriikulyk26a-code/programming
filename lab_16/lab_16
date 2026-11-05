@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    ifstream infile("indata.dat");
+    if (!infile.is_open()) {
+        cerr << "Error: Cannot open indata.dat\n";
+        return 1;
+    }
+
+    vector<double> positive;
+    vector<double> zero;
+    vector<double> negative;
+    double val;
+
+    while (infile >> val) {
+        if (val > 0.0) {
+            positive.push_back(val);
+        } else if (val == 0.0) {
+            zero.push_back(val);
+        } else {
+            negative.push_back(val);
+        }
+    }
+    infile.close();
+
+    ofstream outfile("outdata.dat");
+    if (!outfile.is_open()) {
+        cerr << "Error: Cannot open outdata.dat\n";
+        return 1;
+    }
+
+    for (double num : positive) outfile << num << " ";
+    for (double num : zero)     outfile << num << " ";
+    for (double num : negative) outfile << num << " ";
+    outfile << "\n";
+
+    outfile.close();
+    cout << "Data processed successfully.\n";
+
+    return 0;
+}
