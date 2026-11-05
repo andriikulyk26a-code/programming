@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+
+using namespace std;
+
+struct Car {
+    string model;
+    int year;
+    double price;
+    string color;
+};
+
+int main() {
+    const int count = 6;
+    
+    Car cars[count] = {
+        {"BMW M5",       2001, 15500.0, "Red"},
+        {"Audi A6",      2005, 8200.0,  "Black"},
+        {"Ford Focus",   2001, 4300.0,  "Red"},
+        {"Toyota Camry", 2012, 11000.0, "Silver"},
+        {"Honda Civic",  2001, 5100.0,  "Blue"},
+        {"Opel Astra",   2001, 3900.0,  "Red"}
+    };
+
+    cout << fixed << setprecision(2);
+    cout << "=== All Cars in Stock ===\n";
+    cout << left << setw(15) << "Model" 
+         << setw(8)  << "Year" 
+         << setw(10) << "Price ($)" 
+         << setw(10) << "Color" << "\n";
+    cout << string(43, '-') << "\n";
+
+    for (int i = 0; i < count; i++) {
+        cout << left << setw(15) << cars[i].model 
+             << setw(8)  << cars[i].year 
+             << setw(10) << cars[i].price 
+             << setw(10) << cars[i].color << "\n";
+    }
+
+    cout << "\n=== Found Cars (Year: 2001, Color: Red) ===\n";
+    bool found = false;
+
+    for (int i = 0; i < count; i++) {
+        if (cars[i].year == 2001 && cars[i].color == "Red") {
+            cout << "- " << cars[i].model 
+                 << " (Price: $" << cars[i].price << ")\n";
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "No cars matched the search criteria.\n";
+    }
+
+    return 0;
+}
