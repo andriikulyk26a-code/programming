@@ -1,0 +1,42 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+
+using namespace std;
+
+int main() {
+    double x;
+    char type;
+
+    cout << "Enter x and work type (A, B, C): ";
+    if (!(cin >> x >> type)) return 0;
+
+    double f = cos(x * x + 1.0) - fabs(sin(2.0 * x) - 5.76);
+    double gross = 0.0, rate = 0.0;
+
+    switch (toupper(type)) {
+        case 'A':
+            gross = 100.0 * fabs(f + 50.0);
+            rate = 0.10;
+            break;
+        case 'B':
+            gross = 150.0 * fabs(f + 100.0);
+            rate = 0.15;
+            break;
+        case 'C':
+            gross = 200.0 * fabs(f + 135.0);
+            rate = 0.20;
+            break;
+        default:
+            cout << "Invalid work type\n";
+            return 0;
+    }
+
+    double tax = gross * rate;
+    double net = gross - tax;
+
+    cout << fixed << setprecision(2);
+    cout << "Gross: " << gross << "\nTax: " << tax << "\nNet: " << net << "\n";
+
+    return 0;
+}
