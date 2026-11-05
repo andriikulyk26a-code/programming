@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <iomanip>
+#include <utility>
+
+using namespace std;
+
+double f9(double x) {
+    return cos(x * x + 1.0) - fabs(sin(2.0 * x) - 5.76);
+}
+
+int main() {
+    const int n = 7;
+    vector<double> y(n);
+
+    cout << fixed << setprecision(4);
+    cout << "Initial array:\n";
+    for (int k = 1; k <= n; k++) {
+        y[k - 1] = f9(k);
+        cout << "y[" << k << "] = " << setw(8) << y[k - 1] << "\n";
+    }
+
+    int negIndex = -1, posIndex = -1;
+    int negCount = 0, posCount = 0;
+
+    for (int i = 0; i < n; i++) {
+        if (y[i] < 0.0) {
+            negCount++;
+            if (negCount == 2) negIndex = i;
+        } else if (y[i] > 0.0) {
+            posCount++;
+            if (posCount == 3) posIndex = i;
+        }
+    }
+
+    cout << "\n----------------------------------------\n";
+    if (negIndex != -1 && posIndex != -1) {
+        swap(y[negIndex], y[posIndex]);
+        cout << "Swapped 2nd negative (pos " << negIndex + 1 
+             << ") with 3rd positive (pos " << posIndex + 1 << ").\n\nModified array:\n";
+        for (int i = 0; i < n; i++) {
+            cout << "y[" << i + 1 << "] = " << setw(8) << y[i] << "\n";
+        }
+    } else {
+        if (negIndex == -1) cout << "No 2nd negative element found.\n";
+        if (posIndex == -1) cout << "No 3rd positive element found.\n";
+    }
+
+    return 0;
+}
