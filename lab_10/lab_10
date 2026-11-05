@@ -1,0 +1,48 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+const double PERSON_WT = 170.0;
+const double LBS_PER_GAL = 6.7;
+const double EMPTY_WEIGHT = 9887.0;
+const double EMPTY_MOMENT = 3185853.0;
+
+double crewMoment(int c) {
+    return c * PERSON_WT * 143.0;
+}
+
+double passengerMoment(int p) {
+    int r2 = min(p, 2); p -= r2;
+    int r1 = min(p, 2); p -= r1;
+    int r3 = min(p, 2); p -= r3;
+    int r4 = min(p, 2);
+    return (r1 * 265.0 + r2 * 219.0 + r3 * 295.0 + r4 * 341.0) * PERSON_WT;
+}
+
+double cargoMoment(double cl, double bg) {
+    return cl * 182.0 + bg * 386.0;
+}
+
+double fuelMoment(double f) {
+    double arm = 314.6;
+    if (f > 520.0)      arm = 323.0 - 0.0166667 * (f - 521.0);
+    else if (f > 360.0) arm = 303.0 + 0.125 * (f - 361.0);
+    else if (f > 59.0)  arm = 305.8 - 0.0125 * (f - 60.0);
+    return f * LBS_PER_GAL * arm;
+}
+
+int main() {
+    int crew, pass;
+    double cl, bg, fuel;
+
+    if (!(cin >> crew >> pass >> cl >> bg >> fuel)) return 0;
+
+    double weight = EMPTY_WEIGHT + (crew + pass) * PERSON_WT + cl + bg + fuel * LBS_PER_GAL;
+    double moment = EMPTY_MOMENT + crewMoment(crew) + passengerMoment(pass) + cargoMoment(cl, bg) + fuelMoment(fuel);
+
+    cout << fixed << setprecision(2);
+    cout << weight << "\n" << moment / weight << "\n";
+
+    return 0;
+}
