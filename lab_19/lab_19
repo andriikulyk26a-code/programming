@@ -4,9 +4,12 @@
 
 using namespace std;
 
-// Function f9(x) from variant table
-double f9(double x) {
-    return cos(x * x + 1.0) - fabs(sin(2.0 * x) - 5.76);
+double f4(double x) {
+    return fabs(sin(x) / 3.12 + pow(cos(x), 2)) - 8.3 * sin(3.0 * x);
+}
+
+double f15(double x) {
+    return fabs(pow(cos(x), 2) - 0.51) * sin(3.0 * x - 4.0) - 4.44;
 }
 
 int main() {
@@ -15,35 +18,31 @@ int main() {
     double a[ROWS][COLS];
 
     cout << fixed << setprecision(4);
-    cout << "=== Matrix 4x4 ===\n";
+    cout << "Matrix 4x4:\n";
 
-    // Matrix generation and printing
     for (int k = 1; k <= ROWS; k++) {
         for (int n = 1; n <= COLS; n++) {
-            a[k - 1][n - 1] = f9(k) * sin((double)k / n);
+            a[k - 1][n - 1] = n * f4(k) + sin(k) * f15(n);
             cout << setw(10) << a[k - 1][n - 1] << " ";
         }
         cout << "\n";
     }
 
-    double diagSum = 0.0;
-    int negativeCount = 0;
+    double product = 1.0;
+    bool found = false;
 
-    // Calculation: main diagonal sum and total negative count
-    for (int k = 0; k < ROWS; k++) {
-        for (int n = 0; n < COLS; n++) {
-            if (k == n) {
-                diagSum += a[k][n];
-            }
-            if (a[k][n] < 0.0) {
-                negativeCount++;
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (a[i][j] < -1.0 || a[i][j] > 1.0) {
+                product *= a[i][j];
+                found = true;
             }
         }
     }
 
-    cout << "-------------------------------------------\n";
-    cout << "Sum of main diagonal elements: " << diagSum << "\n";
-    cout << "Count of negative elements:    " << negativeCount << "\n";
+    cout << "\nResult product: ";
+    if (found) cout << product << "\n";
+    else cout << "No elements found\n";
 
     return 0;
 }
