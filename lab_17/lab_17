@@ -1,48 +1,34 @@
 #include <iostream>
-#include <cstring>
-#include <cctype>
 
 using namespace std;
 
 int main() {
-    char str[256];
-    cout << "Enter text: ";
-    cin.getline(str, 256);
+    char source[] = "   Hello     world!    Learning   C++   strings.   ";
+    char result[200];
 
-    char words[50][50];
-    int count = 0;
+    int i = 0, j = 0;
 
-    char* token = strtok(str, " \t");
-    while (token != nullptr && count < 50) {
-        strcpy(words[count++], token);
-        token = strtok(nullptr, " \t");
-    }
+    while (source[i] == ' ') i++;
 
-    bool swapped = false;
-    for (int i = 0; i < count && !swapped; i++) {
-        for (int j = i + 1; j < count; j++) {
-            if (tolower(words[i][0]) == tolower(words[j][0])) {
-                char temp[50];
-                strcpy(temp, words[i]);
-                strcpy(words[i], words[j]);
-                strcpy(words[j], temp);
-
-                cout << "Swapped: \"" << words[j] << "\" and \"" << words[i] << "\"\n";
-                swapped = true;
-                break;
-            }
+    while (source[i] != '\0') {
+        if (source[i] != ' ') {
+            result[j++] = source[i];
         }
+        else {
+            result[j++] = ' ';
+            while (source[i] == ' ') i++;
+            continue;
+        }
+        i++;
     }
 
-    if (!swapped) {
-        cout << "No matching words found.\n";
-    } else {
-        cout << "Result: ";
-        for (int i = 0; i < count; i++) {
-            cout << words[i] << " ";
-        }
-        cout << "\n";
-    }
+    if (j > 0 && result[j - 1] == ' ') j--;
+    result[j] = '\0';
+
+    cout << source << "\n";
+    cout << result << "\n";
+
+    system("pause");
 
     return 0;
 }
