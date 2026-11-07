@@ -2,66 +2,47 @@
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
-#include <vector>
 
 using namespace std;
 
 int main() {
-    srand(time(nullptr));
-
-    const int SETTLEMENTS = 6;
+    const int TOWNS = 6;
     const int CANDIDATES = 5;
-    const int variant = 9;
+    int votes[TOWNS][CANDIDATES];
+    int var = 3;
 
-    int votes[SETTLEMENTS][CANDIDATES];
-    vector<int> totalCandidateVotes(CANDIDATES, 0);
+    srand(time(NULL));
 
-    // Matrix filling: votes in range [450; 949]
-    for (int k = 0; k < SETTLEMENTS; k++) {
-        for (int n = 0; n < CANDIDATES; n++) {
-            votes[k][n] = rand() % 500 + 50 * variant;
-            totalCandidateVotes[n] += votes[k][n];
-        }
+    cout << "Voting table (Towns \\ Candidates):\n";
+    cout << "      ";
+    for (int j = 0; j < CANDIDATES; j++) {
+        cout << "Cand" << j + 1 << "  ";
     }
+    cout << "\n";
 
-    // Print voting results table
-    cout << "=== Voting Results Table ===\n";
-    cout << "Settlement | Cand 1 | Cand 2 | Cand 3 | Cand 4 | Cand 5 |\n";
-    cout << "-----------+--------+--------+--------+--------+--------|\n";
-
-    for (int k = 0; k < SETTLEMENTS; k++) {
-        cout << "Point " << setw(4) << k + 1 << " |";
-        for (int n = 0; n < CANDIDATES; n++) {
-            cout << setw(7) << votes[k][n] << " |";
+    for (int i = 0; i < TOWNS; i++) {
+        cout << "Town " << i + 1 << ": ";
+        for (int j = 0; j < CANDIDATES; j++) {
+            votes[i][j] = rand() % 500 + 50 * var;
+            cout << setw(6) << votes[i][j] << " ";
         }
         cout << "\n";
     }
 
-    cout << "-----------+--------+--------+--------+--------+--------|\n";
-    cout << "Total (Sum)|";
-    for (int n = 0; n < CANDIDATES; n++) {
-        cout << setw(7) << totalCandidateVotes[n] << " |";
-    }
-    cout << "\n\n";
-
-    // Task 9: Find candidates with total votes less than threshold n
-    int threshold;
-    cout << "Enter threshold n: ";
-    if (!(cin >> threshold)) return 0;
-
-    cout << "\nCandidates with total votes < " << threshold << ":\n";
-    bool found = false;
-    for (int n = 0; n < CANDIDATES; n++) {
-        if (totalCandidateVotes[n] < threshold) {
-            cout << "- Candidate " << n + 1 
-                 << " (Total votes: " << totalCandidateVotes[n] << ")\n";
-            found = true;
-        }
+    int targetTown[CANDIDATES];
+    for (int j = 0; j < CANDIDATES; j++) {
+        targetTown[j] = votes[3][j];
     }
 
-    if (!found) {
-        cout << "No candidates found with votes less than " << threshold << ".\n";
+    int maxCand = 0, minCand = 0;
+    for (int j = 1; j < CANDIDATES; j++) {
+        if (targetTown[j] > targetTown[maxCand]) maxCand = j;
+        if (targetTown[j] < targetTown[minCand]) minCand = j;
     }
+
+    cout << "\nIn Town 4:\n";
+    cout << "Max votes: Candidate " << maxCand + 1 << " (" << targetTown[maxCand] << " votes)\n";
+    cout << "Min votes: Candidate " << minCand + 1 << " (" << targetTown[minCand] << " votes)\n";
 
     return 0;
 }
