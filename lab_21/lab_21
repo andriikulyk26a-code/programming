@@ -1,0 +1,41 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+const int N = 7; 
+typedef int Matrix[N][N]; 
+
+void mul(const Matrix A, const Matrix B, Matrix R) {
+    for (int i = 0; i < N; ++i)
+        for (int j = 0; j < N; ++j) {
+            R[i][j] = 0;
+            for (int k = 0; k < N; ++k) R[i][j] += A[i][k] * B[k][j];
+        }
+}
+
+int main() {
+    Matrix A, B, A2, A2B, B2, C;
+    ifstream fa("a.txt"), fb("b.txt");
+    ofstream fc("c.txt");
+
+    for (int i = 0; i < N; ++i)
+        for (int j = 0; j < N; ++j) {
+            fa >> A[i][j];
+            fb >> B[i][j];
+        }
+
+    mul(A, A, A2);   
+    mul(A2, B, A2B);
+    mul(B, B, B2);  
+
+    for (int i = 0; i < N; ++i) {
+        for (int j = 0; j < N; ++j) {
+            C[i][j] = A2B[i][j] - 3 * B2[i][j];
+            fc << C[i][j] << " ";
+        }
+        fc << "\n";
+    }
+
+    return 0;
+}
