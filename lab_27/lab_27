@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Animal {
+public:
+    Animal(const string& name) : Name(name) {
+    }
+
+    const string Name;
+};
+
+class Dog : public Animal {
+public:
+    Dog(const string& name) : Animal(name) {
+    }
+
+    void Bark() {
+        cout << Name << " barks: woof!" << endl;
+    }
+};
+
+int main() {
+    Dog d1("Rex");
+    Dog d2("Buddy");
+
+    d1.Bark();
+    d2.Bark();
+
+    cout << "Name of the first dog: " << d1.Name << endl;
+    cout << "Name of the second dog: " << d2.Name << endl;
+
+    Animal& a = d1;
+    cout << "Through Animal reference: " << a.Name << endl;
+
+    return 0;
+}
